@@ -40,8 +40,8 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
   console.log('Rendering the root path...');
-  //res.sendFile(path.resolve(__dirname, "../../public/index.html"));
-  res.render('pages/index', { userName: "Bill Wright"});
+  res.sendFile(path.resolve(__dirname, "../../public/smsc.html"));
+//   res.render('pages/smsc', { userName: "Bill Wright"});
 });
 
 app.get("/rock", (req, res) => {
