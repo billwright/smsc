@@ -39,9 +39,11 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  console.log('Rendering the root path...');
-  res.sendFile(path.resolve(__dirname, "../../public/smsc.html"));
-//   res.render('pages/smsc', { userName: "Bill Wright"});
+  res.render('pages/smsc', { title: "Sam's Minions Scrambling Club"});
+});
+
+app.get("/tourdeflatirons", (req, res) => {
+    res.render('pages/tourdeflatirons', { title: "Tour de Flatirons"});
 });
 
 app.get("/rock", (req, res) => {

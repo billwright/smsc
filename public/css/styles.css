@@ -14,7 +14,7 @@ h1 {
     color: lawngreen;
     text-align: center;
     font-family: Helvetica, serif;
-    font-size: 48pt;
+    font-size: 32pt;
 }
 
 img {
@@ -63,4 +63,16 @@ table, th, td {
       padding: 15px;
     }
     .row.content {height:auto;} 
+  }
+
+  .smscLogo {
+    width: 120px;
+    position: relative;
+  }
+
+  .fullWidthLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
   }
