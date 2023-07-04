@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "pg": "^8.11.0",
+    "pg-promise": "^11.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+    "start": "echo 'Copying proper .env file...' && cp environments/.env.smsc ./.env && nodemon index.js",
+    "sLab": "nodemon src/main/nodeRestPostgresLab/index.js",
+    "startDatabase": "echo 'TODO...'",
+    "setLabEnv": "cp environments/.env.nodeRestPostgres ./.env && cat .env",
+    "setEnv": "cp environments/.env.smsc ./.env && cat .env",
+    "loadHikingDB" : "cd db/labs && /Applications/flyway-9.20.0/flyway migrate && cd ."
+  }
+}
