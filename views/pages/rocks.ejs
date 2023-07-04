@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Page</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    </head>
+    <body>
+        <h1>Rocks in the Tour de Flatirons</h1>
+        <% if (user) { %>
+            <h2>for <%= user.name %></h2>
+        <% } %>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>GPS Location</th>
+                </tr>
+            </thead>
+            <% rocks.forEach(rock => { %>
+                <tr>
+                    <td><%= rock.name %></td>
+                    <td><%= rock.gps %></td>
+                </tr>
+            <% }); %>
+            <tr></tr>
+        </table>
+
+    </body>
+</html>
