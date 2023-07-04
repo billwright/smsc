@@ -1,0 +1,285 @@
+{
+  "individualResults": [
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "1",
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "initial load",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/nodeRestPostgres/V1__initial_load.sql",
+          "executionTime": 160
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": true,
+      "flywayVersion": "9.20.0",
+      "database": "nodeRestPostgres",
+      "warnings": [],
+      "timestamp": "2023-07-01T15:28:12.462643",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "1",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.20.0",
+      "database": "nodeRestPostgres",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:02:37.904264",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:05:19.170504",
+      "operation": "migrate",
+      "exception": "Migration V1__simplified_schema.sql failed\n------------------------------------------\nSQL State  : 42830\nError Code : 0\nMessage    : ERROR: there is no unique constraint matching given keys for referenced table \"reviews\"\nLocation   : hikingTrailSite/V1__simplified_schema.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V1__simplified_schema.sql)\nLine       : 38\nStatement  : ALTER TABLE \"userinfo\" ADD FOREIGN KEY (\"user_id\") REFERENCES \"reviews\" (\"user_id\")\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:08:37.851008",
+      "operation": "migrate",
+      "exception": "Migration V1__simplified_schema.sql failed\n------------------------------------------\nSQL State  : 42601\nError Code : 0\nMessage    : ERROR: INSERT has more target columns than expressions\n  Position: 73\nLocation   : hikingTrailSite/V1__simplified_schema.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V1__simplified_schema.sql)\nLine       : 52\nStatement  : insert into trails (name, location, length, elevation_gain, difficulty, avg_rating) values (\u0027Connecticut\u0027, 7.1, 2680, \u0027difficult\u0027, 7.11)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "simplified schema",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V1__simplified_schema.sql",
+          "executionTime": 44
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:12:15.867383",
+      "operation": "migrate",
+      "exception": "Migration V2__initial_data_load.sql failed\n------------------------------------------\nSQL State  : 42601\nError Code : 0\nMessage    : ERROR: INSERT has more target columns than expressions\n  Position: 73\nLocation   : hikingTrailSite/V2__initial_data_load.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V2__initial_data_load.sql)\nLine       : 13\nStatement  : insert into trails (name, location, length, elevation_gain, difficulty, avg_rating) values (\u0027Connecticut\u0027, 7.1, 2680, \u0027difficult\u0027, 7.11)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "1",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:17:16.679847",
+      "operation": "migrate",
+      "exception": "Migration V2__initial_data_load.sql failed\n------------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"reviews\" violates foreign key constraint \"reviews_user_id_fkey\"\n  Detail: Key (user_id)\u003d(10) is not present in table \"userinfo\".\nLocation   : hikingTrailSite/V2__initial_data_load.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V2__initial_data_load.sql)\nLine       : 34\nStatement  : insert into reviews (user_id, review, rating) values (10, \u0027Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\u0027, 9.71)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "1",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "initial data load of users and trails",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V2__initial_data_load_of_users_and_trails.sql",
+          "executionTime": 57
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:20:26.089571",
+      "operation": "migrate",
+      "exception": "Migration V3__add_review_data.sql failed\n----------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"reviews\" violates foreign key constraint \"reviews_user_id_fkey\"\n  Detail: Key (user_id)\u003d(10) is not present in table \"userinfo\".\nLocation   : hikingTrailSite/V3__add_review_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql)\nLine       : 1\nStatement  : insert into reviews (user_id, review, rating) values (10, \u0027Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\u0027, 9.71)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "2",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:24:36.509219",
+      "operation": "migrate",
+      "exception": "Migration V3__add_review_data.sql failed\n----------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"reviews\" violates foreign key constraint \"reviews_trail_id_fkey\"\n  Detail: Key (trail_id)\u003d(10) is not present in table \"trails\".\nLocation   : hikingTrailSite/V3__add_review_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql)\nLine       : 1\nStatement  : insert into reviews (trail_id, user_id, review, rating) values (10, 1, \u0027Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\u0027, 9.71)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "2",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:27:13.249414",
+      "operation": "migrate",
+      "exception": "Migration V3__add_review_data.sql failed\n----------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"reviews\" violates foreign key constraint \"reviews_user_id_fkey\"\n  Detail: Key (user_id)\u003d(1) is not present in table \"userinfo\".\nLocation   : hikingTrailSite/V3__add_review_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql)\nLine       : 1\nStatement  : insert into reviews (trail_id, user_id, review, rating) values (32, 1, \u0027Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\u0027, 9.71)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "simplified schema",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V1__simplified_schema.sql",
+          "executionTime": 29
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "initial data load of users and trails",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V2__initial_data_load_of_users_and_trails.sql",
+          "executionTime": 27
+        }
+      ],
+      "migrationsExecuted": 2,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:32:51.259811",
+      "operation": "migrate",
+      "exception": "Migration V3__add_review_data.sql failed\n----------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"reviews\" violates foreign key constraint \"reviews_trail_id_fkey\"\n  Detail: Key (trail_id)\u003d(22) is not present in table \"trails\".\nLocation   : hikingTrailSite/V3__add_review_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql)\nLine       : 21\nStatement  : insert into reviews (trail_id, user_id, review, rating) values (22, 1, \u0027Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.\u0027, 5.1)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "2",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:34:10.388336",
+      "operation": "migrate",
+      "exception": "Migration V3__add_review_data.sql failed\n----------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"images\" violates foreign key constraint \"images_review_id_fkey\"\n  Detail: Key (review_id)\u003d(5) is not present in table \"reviews\".\nLocation   : hikingTrailSite/V3__add_review_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql)\nLine       : 32\nStatement  : insert into images (review_id, image_url, image_caption) values (5, \u0027http://dummyimage.com/162x100.png/dddddd/000000\u0027, \u0027in quam fringilla rhoncus mauris\u0027)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "2",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "add review data",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql",
+          "executionTime": 69
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:35:43.230766",
+      "operation": "migrate",
+      "exception": "Migration V4__add_image_data.sql failed\n---------------------------------------\nSQL State  : 23503\nError Code : 0\nMessage    : ERROR: insert or update on table \"images\" violates foreign key constraint \"images_review_id_fkey\"\n  Detail: Key (review_id)\u003d(5) is not present in table \"reviews\".\nLocation   : hikingTrailSite/V4__add_image_data.sql (/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V4__add_image_data.sql)\nLine       : 1\nStatement  : insert into images (review_id, image_url, image_caption) values (5, \u0027http://dummyimage.com/162x100.png/dddddd/000000\u0027, \u0027in quam fringilla rhoncus mauris\u0027)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "4",
+      "schemaName": "",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "simplified schema",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V1__simplified_schema.sql",
+          "executionTime": 28
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "initial data load of users and trails",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V2__initial_data_load_of_users_and_trails.sql",
+          "executionTime": 26
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "add review data",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V3__add_review_data.sql",
+          "executionTime": 32
+        },
+        {
+          "category": "Versioned",
+          "version": "4",
+          "description": "add image data",
+          "type": "SQL",
+          "filepath": "/Users/billwright/Documents/cu-courses/csci3308/projects/smsc/db/labs/hikingTrailSite/V4__add_image_data.sql",
+          "executionTime": 18
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.20.0",
+      "database": "hikingTrailSite",
+      "warnings": [],
+      "timestamp": "2023-07-02T13:40:31.284405",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    }
+  ]
+}

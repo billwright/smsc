@@ -1,0 +1,15 @@
+insert into images (review_id, image_url, image_caption) values (5, 'http://dummyimage.com/162x100.png/dddddd/000000', 'in quam fringilla rhoncus mauris');
+insert into images (review_id, image_url, image_caption) values (8, 'http://dummyimage.com/110x100.png/dddddd/000000', 'venenatis non sodales sed tincidunt eu');
+insert into images (review_id, image_url, image_caption) values (11, 'http://dummyimage.com/224x100.png/cc0000/123455', 'rutrum rutrum neque aenean auctor');
+insert into images (review_id, image_url, image_caption) values (14, 'http://dumme.com/12345x100.png/cc0000/ffffff', 'phasellus sit amet erat nulla tempus');
+insert into images (review_id, image_url, image_caption) values (17, 'http://dummyimage.com/224x100.png/cc0000/ffffff', 'nulla pede ullamcorper augue a suscipit nulla');
+insert into images (review_id, image_url, image_caption) values (20, 'http://dummyimage.com/152x100.png/dddddd/000000', 'lectus aliquam sit amet diam in magna bibendum');
+insert into images (review_id, image_url, image_caption) values (23, 'http://dummyimage.com/102x100.png/ff4444/ffffff', 'nunc viverra dapibus nulla suscipit');
+insert into images (review_id, image_url, image_caption) values (26, 'http://dummyimage.com/122x100.png/5fa2dd/ffffff', 'elementum ligula vehicula consequat morbi a');
+insert into images (review_id, image_url, image_caption) values (29, 'http://dummyimage.com/205x100.png/5fa2dd/ffffff', 'semper est quam pharetra magna ac consequat metus sapien ut');
+insert into images (review_id, image_url, image_caption) values (25, 'http://dummyimage.com/129x100.png/dddddd/000000', 'elementum pellentesque quisque porta volutpat erat');
+insert into images (review_id, image_url, image_caption) values (21, 'http://dummyimage.com/208x100.png/dddddd/000000', 'congue vivamus metus arcu adipiscing molestie hendrerit at vulputate');
+insert into images (review_id, image_url, image_caption) values (17, 'http://dummyimage.com/209x100.png/5fa2dd/ffffff', 'in quis justo maecenas rhoncus');
+insert into images (review_id, image_url, image_caption) values (13, 'http://dummyimage.com/231x100.png/dddddd/000000', 'congue diam id ornare imperdiet');
+insert into images (review_id, image_url, image_caption) values (9, 'http://dummyimage.com/133x100.png/dddddd/000000', 'eget congue eget semper rutrum nulla nunc purus phasellus in');
+insert into images (review_id, image_url, image_caption) values (3, 'http://dummyimage.com/242x100.png/5fa2dd/ffffff', 'vel enim sit amet nunc viverra dapibus nulla');
