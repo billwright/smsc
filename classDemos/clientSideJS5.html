@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+        function printToday() {
+          var today = new Date();
+          var hours = today.getHours();
+          var minutes = today.getMinutes();
+          var seconds = today.getSeconds();
+          return `${today.toDateString()}   ${hours}:${minutes}:${seconds}`;
+        }
+  
+        function updateDOMWithNewTime() {
+          const paragraph = document.getElementById("currentTime")
+          paragraph.innerHTML = (new Date).toLocaleTimeString();
+        }
+      </script>
+  </head>
+  <body>
+    <h2>Here's today's date:</h2>
+    <p id="currentTime">
+        Replace time here
+    </p>
+    <script>  
+        setInterval(updateDOMWithNewTime, 1000);
+    </script>
+  </body>
+</html>
