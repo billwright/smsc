@@ -1,8 +1,11 @@
 const express = require("express");
-bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const path = require("path");
-
+const logger = require('morgan');
 const pgp = require("pg-promise")();
+const cookieParser = require('cookie-parser');
+
+// Allows easy reading a local .env file to import settings
 require("dotenv").config();
 
 const SELECT_ALL_ROCKS_QUERY = "select id,name from rock";
@@ -20,6 +23,8 @@ const db = pgp(dbConfig);
 
 const app = new express();
 app.use(bodyParser.json());
+app.use(logger(process.env.MORGAN_LOGGING_OUTPUT_FORMAT));
+app.use(cookieParser());
 
 // Optional since express defaults to CWD/views
 // TODO: figure out why this next line doesn't work
@@ -38,8 +43,14 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 
+console.log('After calling listen()...');
+
 app.get("/", (req, res) => {
-  res.render('pages/smsc', { title: "Sam's Minions Scrambling Club"});
+  res.render('pages/smsc', 
+    { 
+        title: "Sam's Minions Scrambling Club",
+        version: `version: ${process.env.VERSION}`
+    });
 });
 
 app.get("/tourdeflatirons", (req, res) => {
