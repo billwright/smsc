@@ -39,7 +39,7 @@ const ejs = require('ejs');
 app.set('view engine', 'ejs');
 
 const port = process.env.EXPRESS_LISTENING_PORT;
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 
