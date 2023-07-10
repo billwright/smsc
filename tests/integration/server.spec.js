@@ -1,6 +1,9 @@
 // Imports the index.js file to be tested.
 const server = require('../../index'); 
+
 // Importing libraries
+// TODO: Figure out why I don't need to require the mocha library to use 
+// 'describe' and 'it'.
 
 // Chai HTTP provides an interface for live integration testing of the API's.
 const chai = require('chai');
@@ -23,6 +26,5 @@ describe('Server!', () => {
       });
   });
 
-  // ===========================================================================
-  // TO-DO: Part A Login unit test case
+
 });
