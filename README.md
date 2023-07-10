@@ -26,6 +26,25 @@ To test this service, first start up the docker postgres image like this:
 ```bash
 > docker run -it --rm --env POSTGRES_PASSWORD=password postgres
 ```
+Or just do:
+
+```bash
+> npm run startDB
+```
+
+If the database isn't connected, we'll have to create it:
+
+```bash
+> psql --host=localhost --port=5432 --username=postgres --command='create database smsc;'
+Password for user postgres: 
+CREATE DATABASE
+```
+
+Now load the starting data into the database:
+
+```bash
+> npm run loadDB
+```
 
 Next start the server so that it automatically restarts on changes with:
 
