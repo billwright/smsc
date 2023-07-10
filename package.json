@@ -11,19 +11,29 @@
     "pg-promise": "^11.5.0"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^9.2.0",
     "chai": "^4.3.7",
     "chai-http": "^4.4.0",
     "mocha": "^10.2.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "pactum": "^3.4.1"
   },
   "scripts": {
     "test": "mocha --recursive ./tests",
     "testw": "mocha --recursive ./tests --watch ./modules",
     "start": "echo 'Copying proper .env file...' && cp environments/.env.smsc ./.env && nodemon index.js",
     "sLab": "nodemon src/main/nodeRestPostgresLab/index.js",
-    "startDatabase": "echo 'TODO...'",
+    "startDB": "docker run -it --rm --env POSTGRES_PASSWORD=password postgres",
+    "createDB": "psql --host=localhost --port=5432 --username=postgres --command='create database smsc;'",
+    "loadDB": "cd db && /Applications/flyway-9.20.0/flyway migrate && cd -",
     "setLabEnv": "cp environments/.env.nodeRestPostgres ./.env && cat .env",
     "setEnv": "cp environments/.env.smsc ./.env && cat .env",
-    "loadHikingDB": "cd db/labs && /Applications/flyway-9.20.0/flyway migrate && cd ."
+    "cuke": "./node_modules/.bin/cucumber-js --config config/cucumber.yaml"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
   }
 }

@@ -1,22 +1,22 @@
-const express = require("express");
+const express = require('express');
 const bodyParser = require('body-parser');
-const path = require("path");
+const path = require('path');
 const logger = require('morgan');
-const pgp = require("pg-promise")();
+const pgp = require('pg-promise')();
 const cookieParser = require('cookie-parser');
 
 // Allows easy reading a local .env file to import settings
-require("dotenv").config();
+require('dotenv').config();
 
-const SELECT_ALL_ROCKS_QUERY = "select id,name from rock";
-const SELECT_ONE_ROCK_QUERY = "select id,name from rock where id=$1";
+const SELECT_ALL_ROCKS_QUERY = 'select id,name from rock';
+const SELECT_ONE_ROCK_QUERY = 'select id,name from rock where id=$1';
 
 const dbConfig = {
-  host: process.env.POSTGRES_HOST,
-  port: process.env.POSTGRES_PORT,
-  database: process.env.POSTGRES_DB,
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    database: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
 };
 // Connect to database using the above details
 const db = pgp(dbConfig);
@@ -40,117 +40,125 @@ app.set('view engine', 'ejs');
 
 const port = process.env.EXPRESS_LISTENING_PORT;
 module.exports = app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });
 
 console.log('After calling listen()...');
 
-app.get("/", (req, res) => {
-  res.render('pages/smsc', 
-    { 
+app.get('/', (req, res) => {
+    res.render('pages/smsc', {
         title: "Sam's Minions Scrambling Club",
-        version: `version: ${process.env.VERSION}`
+        version: `version: ${process.env.VERSION}`,
     });
 });
 
-app.get("/tourdeflatirons", (req, res) => {
-    res.render('pages/tourdeflatirons', { title: "Tour de Flatirons"});
+app.get('/tourdeflatirons', (req, res) => {
+    res.render('pages/tourdeflatirons', { title: 'Tour de Flatirons' });
 });
 
-app.get("/rock", (req, res) => {
-  console.log("Returning all the rocks...");
-  db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
-    .then(function (data) {
-        res.status(200).json({
-            allRocks: data,
-          });
-    })
-    .catch(function (error) {
-      // error;
-      res.send({
-        route: req.path,
-        error: error
-      })
-    });
+app.get('/rock', (req, res) => {
+    console.log('Returning all the rocks...');
+    db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
+        .then(function (data) {
+            res.status(200).json({
+                allRocks: data,
+            });
+        })
+        .catch(function (error) {
+            console.log('Got an error:', error);
+            res.status(500).send({
+                route: req.path,
+                error,
+            });
+        });
     console.log('Done with this function');
 });
 
 app.get('/rocks', (req, res) => {
     db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
-    .then(function (data) {
-        const pageData = { 
-            user: {name: "Bill Wright"}, 
-            rocks: data
-        };
-        res.render('pages/rocks', pageData);
-    })
-    .catch(function (error) {
-      // error;
-      res.send({
-        route: req.path,
-        error: error
-      })
-    });
+        .then(function (data) {
+            const pageData = {
+                user: { name: 'Bill Wright' },
+                rocks: data,
+            };
+            res.render('pages/rocks', pageData);
+        })
+        .catch(function (error) {
+            // error;
+            res.send({
+                route: req.path,
+                error: error,
+            });
+        });
 });
 
-app.get("/rock2", (req, res) => {
+app.get('/rock2', (req, res) => {
     const selectPromise = db.manyOrNone(SELECT_ALL_ROCKS_QUERY);
 
     function handleQueryResults(data) {
-          res.status(200).json({
-              allRocks: data,
-            });
-    };
+        res.status(200).json({
+            allRocks: data,
+        });
+    }
 
     function handleError(error) {
         res.send({
             route: req.path,
-            error: error
-          }); 
-    };
+            error: error,
+        });
+    }
 
     selectPromise.then(handleQueryResults);
     selectPromise.catch(handleError);
-  });
+});
 
-app.get("/rock/:id", (req, res) => {
+app.get('/rock/:id', (req, res) => {
     db.one(SELECT_ONE_ROCK_QUERY, req.params.id)
-    .then(function (data) {
-        res.send(data);
-    })
-    .catch(function (error) {
-      res.status(404).json({
-        route: req.path,
-        error: error
-      });
-    });
-//   res.sendFile(path.resolve(__dirname, "../../public/rock.html"));
+        .then(function (data) {
+            res.send(data);
+        })
+        .catch(function (error) {
+            res.status(404).json({
+                route: req.path,
+                error: error,
+            });
+        });
+    //   res.sendFile(path.resolve(__dirname, "../../public/rock.html"));
 });
 
 app.post('/rock', (req, res) => {
-    db.one('INSERT INTO rock(name) VALUES($1) RETURNING id', [req.body.name])
-    .then(data => {
-        console.log(data.id); // return created id;
-        res.send({
-            id: data.id
+    db.one(
+        'INSERT INTO rock(name, gps_coordinates) VALUES($1, $2) RETURNING id',
+        [req.body.name, req.body.gps_coordinates]
+    )
+        .then((data) => {
+            console.log(data.id); // return created id;
+            res.status(201).json({
+                id: data.id,
+            });
+        })
+        .catch((error) => {
+            console.log('ERROR in post:', error);
+            res.status(500);
+            if (error.code == 'ECONNREFUSED') {
+                const reason = 'Failed to connect to the database';
+                console.log(reason);
+                // In general, we would never return this information to the client
+                res.json({ reason });
+            } else {
+                res.json({ error });
+            }
         });
-    })
-    .catch(error => {
-        console.log('ERROR:', error); 
-        res.status(500).send({
-            error: error
-        });
-    });
 });
 
 app.delete('/rock/:id', (req, res) => {
     db.result('DELETE FROM rock WHERE id = $1', req.params.id)
-    .then(result => {
-        // rowCount = number of rows affected by the query
-        console.log(result.rowCount);
-        res.status(200).send(); // print how many records were deleted;
-    })
-    .catch(error => {
-        console.log('ERROR:', error);
-    });
-})
+        .then((result) => {
+            // rowCount = number of rows affected by the query
+            console.log(result.rowCount);
+            res.status(200).send(); // print how many records were deleted;
+        })
+        .catch((error) => {
+            console.log('ERROR:', error);
+        });
+});
