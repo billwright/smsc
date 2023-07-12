@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+var fs = require("fs");
+var https = require("https");
 const logger = require('morgan');
 const pgp = require('pg-promise')();
 const cookieParser = require('cookie-parser');
@@ -17,6 +19,7 @@ const dbConfig = {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
+    ssl: true
 };
 // Connect to database using the above details
 const db = pgp(dbConfig);
@@ -39,11 +42,22 @@ const ejs = require('ejs');
 app.set('view engine', 'ejs');
 
 const port = process.env.EXPRESS_LISTENING_PORT;
-module.exports = app.listen(port, () => {
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync("server.key"),
+//       cert: fs.readFileSync("server.cert"),
+//     },
+//     app
+//   )
+app
+  .listen(port, () => {
     console.log(`App listening on port ${port}`);
+    console.log(`Go to http://localhost:${port}/`);
 });
 
-console.log('After calling listen()...');
+module.exports = app;
+
 
 app.get('/', (req, res) => {
     res.render('pages/smsc', {
@@ -75,6 +89,7 @@ app.get('/rock', (req, res) => {
 });
 
 app.get('/rocks', (req, res) => {
+    console.log('Trying to render rocks page...');
     db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
         .then(function (data) {
             const pageData = {
@@ -84,10 +99,10 @@ app.get('/rocks', (req, res) => {
             res.render('pages/rocks', pageData);
         })
         .catch(function (error) {
-            // error;
-            res.send({
+            console.log('Error trying to get rocks from db:', error)
+            res.status(500).json({
                 route: req.path,
-                error: error,
+                error: error
             });
         });
 });
