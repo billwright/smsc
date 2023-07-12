@@ -36,7 +36,7 @@ RUN npm clean-install --only=production
 # but Azure deployment has a problem with port mapping so I'm
 # running here as root.
 #COPY --chown=node:node src/main/fibonacci /usr/src/app
-COPY environments/ /usr/src/app
+COPY environments/.env.smsc.azure /usr/src/app/.env
 COPY modules/ /usr/src/app
 COPY public/ /usr/src/app
 COPY views/ /usr/src/app
