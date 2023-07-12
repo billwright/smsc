@@ -1,0 +1,7 @@
+default:
+  publishQuiet: true
+  parallel: 2
+  paths:
+    - 'tests/bdd/**/*.feature'
+  format:
+    - "html:cucumber-report.html"

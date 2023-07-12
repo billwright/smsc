@@ -22,11 +22,12 @@ INSERT INTO tour VALUES (DEFAULT, 2004);
 
 -- Minion Table
 -- (username, name, email, role, created_at)
-INSERT INTO minion VALUES (DEFAULT, 'KidKennedy', 'David Kennedy', 'david.kennedy@colorado.edu');
-INSERT INTO minion VALUES (DEFAULT, 'Googolplex', 'Jack Gugel', 'jack.gugel@gmail.com');
-INSERT INTO minion VALUES (DEFAULT, 'Stephon', 'Stefan Griebel', 'climbingmountains@gmail.com');
-INSERT INTO minion VALUES (DEFAULT, 'NewsOfTheWorld', 'Jack Neus', 'jack.neus@gmail.com');
-INSERT INTO minion VALUES (DEFAULT, 'Satanb', 'Bill Wright', 'billwright510@gmail.com', 'satan', '2003-01-01');
+INSERT INTO minion VALUES (DEFAULT, 'KidKennedy', 'David', 'Kennedy', 'david.kennedy@colorado.edu');
+INSERT INTO minion VALUES (DEFAULT, 'Googolplex', 'Jack', 'Gugel', 'jack.gugel@gmail.com');
+INSERT INTO minion VALUES (DEFAULT, 'Stephon', 'Stefan', 'Griebel', 'climbingmountains@gmail.com');
+INSERT INTO minion VALUES (DEFAULT, 'NewsOfTheWorld', 'Jack', 'Neus', 'jack.neus@gmail.com');
+INSERT INTO minion VALUES (DEFAULT, 'Satan', 'Bill', 'Wright', 'billwright510@gmail.com', 'satan', '2003-01-01');
+INSERT INTO minion VALUES (DEFAULT, 'JeffV', 'Jeff', 'Valliere', 'jeff.valliere@gmail.com', 'non-minion', '2013-01-01');
 
 -- Rock Table
 INSERT INTO rock VALUES (DEFAULT, 'The First Flatiron');

@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <!-- <button onclick="bgChange">Click Me For Background Change</button> -->
+    <button>Click Me For Background Change</button>
+    <script>
+        const btn = document.querySelector("button");
+  
+        function random(number) {
+          return Math.floor(Math.random() * (number + 1));
+        }
+  
+        function bgChange() {
+          // This generates a string that looks like this: rgb(123,231,63)
+          const rndCol = `rgb(${random(255)},${random(255)},${random(255)})`;
+          document.body.style.backgroundColor = rndCol;
+        }
+  
+        btn.onclick = bgChange;
+      </script>
+  </body>
+</html>

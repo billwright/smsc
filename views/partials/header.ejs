@@ -1,0 +1,34 @@
+<%- include('../partials/head'); -%>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">
+        Logo
+        <!-- <img class="smscLogo" src="/images/smscLogo.png" alt="SMSC small logo"/> -->
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li <%= (page === 'Home') ? 'class=active' : '' %> >
+            <a href="/">
+                Home
+            </a>
+        </li>
+        <li <%= (page === 'About') ? 'class=active' : '' %> ><a href="about">About</a></li>
+        <li <%= (page === 'Tour') ? 'class=active' : '' %> ><a href="tourdeflatirons">Tour de Flatirons</a></li>
+        <li <%= (page === 'Contact') ? 'class=active' : '' %> ><a href="contact">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
