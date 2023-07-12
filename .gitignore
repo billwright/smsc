@@ -1,2 +1,7 @@
 .vscode/
 node_modules/
+.DS_Store
+cucumber-report.html
+server.cert
+server.key
+db/report.*
