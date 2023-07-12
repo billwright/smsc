@@ -28,8 +28,8 @@
         "start": "echo 'Copying proper .env file...' && cp environments/.env.smsc.local ./.env && nodemon index.js",
         "starta": "echo 'Copying proper .env file...' && cp environments/.env.smsc.local.azuredb ./.env && nodemon index.js",
         "startDB": "docker run -it --rm --env POSTGRES_PASSWORD=password postgres",
-        "test": "cp environments/.env.build.test ./.env && mocha --recursive ./tests/unit ./tests/integration",
-        "testw": "mocha --recursive ./tests/unit ./tests/integration --watch ./modules",
+        "test": "cp environments/.env.build.test ./.env && mocha  --exit --recursive ./tests/unit ./tests/integration",
+        "testw": "mocha --exit --recursive ./tests/unit ./tests/integration --watch ./modules",
         "setLabEnv": "cp environments/.env.nodeRestPostgres ./.env && cat .env"
     },
     "prettier": {
