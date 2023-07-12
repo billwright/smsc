@@ -1,0 +1,52 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - node-fibonacce-web-app
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-docker-on-azure:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://csci3308registry.azurecr.io/
+        username: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN }}
+        password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: csci3308registry.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN }}/smsc-server:${{ github.sha }}
+        file: ./Dockerfile
+
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: build-docker-on-azure
+#     environment:
+#       name: 'production'
+#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+#     steps:
+#     - name: Deploy to Azure Web App
+#       id: deploy-to-webapp
+#       uses: azure/webapps-deploy@v2
+#       with:
+#         app-name: 'smsc-web-app'
+#         slot-name: 'production'
+#         publish-profile: ${{ secrets.AzureAppService_PublishProfile_41dea2d113444dda9fa2fb2c2f76543b }}
+#         images: 'csci3308registry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_93a686dcd66b4d25ab947b20656b5f34 }}/node-fibonacci:${{ github.sha }}'
