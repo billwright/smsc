@@ -30,6 +30,3 @@ jobs:
             - run: npm test
             - run: echo "All Done!"
 
-    deploy:
-        runs-on: ubuntu-latest
-        
