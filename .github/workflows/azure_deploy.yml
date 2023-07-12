@@ -31,7 +31,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: csci3308registry.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN }}/smsc-server:${{ github.sha }}
+        tags: csci3308registry.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN }}/smsc-server
         file: ./Dockerfile
 
 #   deploy:
