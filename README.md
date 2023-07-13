@@ -60,7 +60,7 @@ It is automatically deployed via a GitHub Actions pipeline that can be viewed he
 
 ## Database Schema
 
-![image of database schema](documents/images/SMSCSchema.png)
+![image of database schema](docs/images/SMSCSchema.png)
 
 ## Local testing
 
