@@ -22,3 +22,10 @@ jobs:
         - run: npm ci
         - run: npm cuke
         - run: echo "All Done!"
+        - name: Test Report
+          uses: dorny/test-reporter@v1
+          if: success() || failure()    # run this step even if previous step failed
+          with:
+            name: BDD Tests                # Name of the check run which will be created
+            path: cucumber-report.html     # Path to test results
+            reporter: cucumber-html        # Format of test results
