@@ -58,11 +58,12 @@ app
 
 module.exports = app;
 
+const {version} = require('./package.json');
 
 app.get('/', (req, res) => {
     res.render('pages/smsc', {
         title: "Sam's Minions Scrambling Club",
-        version: `version: ${process.env.VERSION}`,
+        version: `version: ${version}`,
     });
 });
 
