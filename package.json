@@ -22,7 +22,7 @@
         "buildDocker": "docker build --tag smsc_server . && docker images | head -n 2",
         "buildDockerObsolete": "docker build --tag csci3308registry.azurecr.io/smsc_server . && docker images | head -n 2",
         "createDB": "psql --host=localhost --port=5432 --username=postgres --command='create database smsc;'",
-        "cuke": "cucumber-js --config config/cucumber.yaml",
+        "cuke": "cp environments/.env.bdd.deploy.test ./.env && cucumber-js --config config/cucumber.yaml",
         "loadDB": "cd db && /Applications/flyway-9.20.0/flyway migrate && cd -",
         "setEnv": "cp environments/.env.smsc.local ./.env && cat .env",
         "sLab": "nodemon src/main/nodeRestPostgresLab/index.js",

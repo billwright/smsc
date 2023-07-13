@@ -7,7 +7,7 @@ const BASE_URL = process.env.BASE_URL;
 let spec;
 
 Before(function () {
-    console.log('In the Before function');
+    console.log('Testing against this server:', BASE_URL);
 });
 
 After(function () {
