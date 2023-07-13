@@ -37,3 +37,13 @@ jobs:
               publish_branch: gh-pages
               publish_dir: results-history
               keep_files: true   
+              # billwright.github.io
+        - name: Post the link to the report
+          if: always()
+          uses: Sibz/github-status-action@v1
+          with: 
+              authToken: ${{secrets.GITHUB_TOKEN}}
+              context: 'Test report'
+              state: 'success'
+              sha: ${{ github.event.pull_request.head.sha }}
+              target_url: billwright.github.io/html-reporter-github-pages/${{ github.run_number }}
