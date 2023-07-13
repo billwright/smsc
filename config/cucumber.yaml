@@ -1,7 +1,8 @@
 default:
   publishQuiet: true
+  publish: true
   parallel: 2
   paths:
     - 'tests/bdd/**/*.feature'
   format:
-    - "html:cucumber-report.html"
+    - "html:test-reports/cucumber-report.html"
