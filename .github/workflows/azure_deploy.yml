@@ -53,4 +53,4 @@ jobs:
     - name: Kick off post-deploy BDD tests
       uses: benc-uk/workflow-dispatch@v1
       with:
-            workflow: run-bdd-post-deploy.yml
+            workflow: post_deploy_bdd_testing.yml
