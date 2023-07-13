@@ -16,8 +16,8 @@ FROM node:20-bullseye-slim
 # Install any extra tools you might want
 RUN apt-get update
 RUN apt-get install vim -y
-RUN apt-get install nano -y
-RUN apt-get install curl -y
+# RUN apt-get install nano -y
+# RUN apt-get install curl -y
 
 # Create the install directory in the image and switch to it
 WORKDIR /usr/src/app
@@ -37,11 +37,10 @@ RUN npm clean-install --only=production
 # running here as root.
 #COPY --chown=node:node src/main/fibonacci /usr/src/app
 COPY environments/.env.smsc.azure /usr/src/app/.env
-COPY modules/ /usr/src/app
-COPY public/ /usr/src/app
-COPY views/ /usr/src/app
-COPY index.js /usr/src/app
-COPY .env /usr/src/app
+COPY modules/ /usr/src/app/modules
+COPY public/ /usr/src/app/public
+COPY views/ /usr/src/app/views
+COPY index.js /usr/src/app/index.js
 
 # Expose the port where we have the node server listening
 # EXPOSE 3000
@@ -52,7 +51,7 @@ EXPOSE 80
 # Start up your application. Use the principle of least privilege
 # USER node -- see above on why I'm running as root
 # CMD ["node", "./bin/www"]
-CMD ["npm", "start"]
+CMD ["npm", "run", "startAzure"]
 
 
 

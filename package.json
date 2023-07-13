@@ -19,14 +19,16 @@
         "pactum": "^3.4.1"
     },
     "scripts": {
-        "buildDocker": "docker build --tag csci3308registry.azurecr.io/smsc_server . && docker images | head -n 2",
+        "buildDocker": "docker build --tag smsc_server . && docker images | head -n 2",
+        "buildDockerObsolete": "docker build --tag csci3308registry.azurecr.io/smsc_server . && docker images | head -n 2",
         "createDB": "psql --host=localhost --port=5432 --username=postgres --command='create database smsc;'",
         "cuke": "cucumber-js --config config/cucumber.yaml",
         "loadDB": "cd db && /Applications/flyway-9.20.0/flyway migrate && cd -",
         "setEnv": "cp environments/.env.smsc.local ./.env && cat .env",
         "sLab": "nodemon src/main/nodeRestPostgresLab/index.js",
         "start": "echo 'Copying proper .env file...' && cp environments/.env.smsc.local ./.env && nodemon index.js",
-        "starta": "echo 'Copying proper .env file...' && cp environments/.env.smsc.local.azuredb ./.env && nodemon index.js",
+        "startAzure": "node index.js",
+        "startWithAzureDB": "echo 'Copying proper .env file...' && cp environments/.env.smsc.local.azuredb ./.env && nodemon index.js",
         "startDB": "docker run -it --rm --env POSTGRES_PASSWORD=password postgres",
         "test": "cp environments/.env.build.test ./.env && mocha  --exit --recursive ./tests/unit ./tests/integration",
         "testw": "mocha --exit --recursive ./tests/unit ./tests/integration --watch ./modules",
