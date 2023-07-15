@@ -5,4 +5,4 @@ default:
   paths:
     - 'tests/bdd/**/*.feature'
   format:
-    - "html:test-reports/cucumber-report.html"
+    - "html:cucumber-reports/cucumber-report.html"

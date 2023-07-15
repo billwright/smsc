@@ -21,7 +21,13 @@ jobs:
               cache: 'npm'
         - run: npm ci
         - run: npm run cuke
-        - run: echo "All Done!"
+
+        - name: Archive code coverage results
+          uses: actions/upload-artifact@v3
+          with:
+            name: code-coverage-report
+            path: cucumber-reports/
+
         - name: Publish Test Report to GitHub Pages
           uses: PavanMudigonda/html-reporter-github-pages/composite@v1.1
           with:
@@ -37,12 +43,4 @@ jobs:
               publish_branch: gh-Pages
               publish_dir: test-reports
               keep_files: true   
-        # - name: Post the link to the report
-        #   if: always()
-        #   uses: Sibz/github-status-action@v1
-        #   with: 
-        #       authToken: ${{secrets.GITHUB_TOKEN}}
-        #       context: 'Test report'
-        #       state: 'success'
-        #       sha: ${{ github.event.pull_request.head.sha }}
-        #       target_url: billwright.github.io/html-reporter-github-pages/${{ github.run_number }}
+        

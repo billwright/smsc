@@ -5,3 +5,5 @@ cucumber-report.html
 server.cert
 server.key
 db/report.*
+.nyc_output/
+coverage/
