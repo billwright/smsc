@@ -32,6 +32,7 @@
         "startDB": "docker run -it --rm --env POSTGRES_PASSWORD=password postgres",
         "test": "cp environments/.env.build.test ./.env && mocha  --exit --recursive ./tests/unit ./tests/integration",
         "testw": "mocha --exit --recursive ./tests/unit ./tests/integration --watch ./modules",
+        "testwp": "mocha ./tests/unit/primeFactors.spec.js --watch ./modules/ ./tests/unit/primeFactors.spec.js",
         "setLabEnv": "cp environments/.env.nodeRestPostgres ./.env && cat .env"
     },
     "prettier": {

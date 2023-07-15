@@ -6,7 +6,7 @@ var https = require("https");
 const logger = require('morgan');
 const pgp = require('pg-promise')();
 const cookieParser = require('cookie-parser');
-
+ 
 // Allows easy reading a local .env file to import settings
 require('dotenv').config();
 
@@ -177,4 +177,16 @@ app.delete('/rock/:id', (req, res) => {
         .catch((error) => {
             console.log('ERROR:', error);
         });
+});
+
+const primeFactors = require('./modules/primeFactors');
+app.get('/primeFactors', (req, res) => {
+    const input = req.query.input;
+    const factors = primeFactors(input);
+    console.log('prime factors of ', input, 'are', factors)
+    res.status(200).json({ input, factors });
+});
+
+app.get('/primeFactorUi', (req, res) => {
+    res.render('pages/primeFactors');
 });

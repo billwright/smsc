@@ -1,0 +1,35 @@
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+function getPrimeFactors() {
+    const inputBox = document.getElementById('input');
+    const url = '/primeFactors?input=' + inputBox.value;
+
+    const ulElement = document.getElementById('factorList');
+    removeAllChildNodes(ulElement);
+    const h2InputNumberElement = document.getElementById('inputNumber');
+    h2InputNumberElement.innerHTML = 'thinking...';
+    const executionTimeParagraph = document.getElementById('executionTimeParagraph');
+    executionTimeParagraph.innerHTML = '';
+
+    const start = performance.now();
+
+    // Get factors by calling REST endpoint...
+    fetch(url)
+        .then((response) => response.json())
+        .then(({ input, factors }) => {
+            removeAllChildNodes(ulElement);
+            
+            h2InputNumberElement.innerHTML = `Factors for ${input}`;
+            const end = performance.now();
+            executionTimeParagraph.innerHTML = `Execution time: ${Math.floor(end - start)} ms`;
+
+            factors.forEach((factor) => {
+                let liElement = document.createElement('li');
+                liElement.innerText = factor;
+                ulElement.appendChild(liElement);
+            });
+        });
+}

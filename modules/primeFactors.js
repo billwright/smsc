@@ -1,5 +1,15 @@
 function primeFactors(input) {
-    // returns a list of prime factors
-    // Example: primeFactors(12) -> [2,2,3]
-    
+    const factors = [];
+
+    let current = input;
+    for (i=2; i <= input; i++){
+        while (current % i == 0) {
+            factors.push(i);
+            current /= i;
+        }
+    };
+
+    return factors;
 }
+
+module.exports = primeFactors;
