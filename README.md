@@ -102,3 +102,10 @@ This is defined in the package.json file as:
 ```
 
 This copies the local environment file to the local directory so that those properties are used when starting up the server. 
+
+### Code coverage
+
+I'm using nyc for code coverage and that is configured by the
+.nycrc file in the root directory.
+
+Documentation is here: https://www.npmjs.com/package/nyc 
