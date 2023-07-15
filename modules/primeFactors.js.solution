@@ -1,0 +1,45 @@
+function primeFactors(input) {
+    // returns a list of prime factors
+    // Example: primeFactors(12) -> [2,2,3]
+
+    // Version 1: This works for 2 and 3
+    // return [];
+
+    // Version 2: This works for 2 and 4 and any power of 2
+    // const factors = [];
+    // let current = input;
+    // while (current % 2 == 0) {
+    //     factors.push(2);
+    //     current /= 2;
+    // }
+    // return factors;
+
+    // Version 3: This works for any number, but timed
+    // out our test for number 1234567897
+    // const factors = [];
+    // let current = input;
+    // for (let i = 2; i <= input; i++) {
+    //     while (current % i == 0) {
+    //         console.log('pushing:', i)
+    //         factors.push(i);
+    //         current /= i;
+    //     }
+    // }
+    // return factors;
+
+    // Version 4: Recursive
+    return _primeFactors(input, []);
+}
+
+function _primeFactors(input, factors) {
+    for (let i = 2; i <= input; i++) {
+        if (input % i == 0) {
+            console.log('pushing:', i);
+            factors.push(i)
+            return _primeFactors(input / i, factors);
+        }
+    }
+    return factors;
+}
+
+module.exports = primeFactors;

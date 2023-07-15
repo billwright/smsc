@@ -84,3 +84,22 @@ table, th, td {
     margin-right: auto;
     width: 50%;
   }
+
+button {
+    padding: 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.blue {
+    background-color: #3498db;
+}
+
+button.green {
+    background-color: #2ecc71;
+}
+
+button.orange {
+   background-color: orangered;
+}

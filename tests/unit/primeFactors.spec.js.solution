@@ -1,0 +1,57 @@
+const primeFactors = require('../../modules/primeFactors');
+const chai = require('chai');
+const expect = chai.expect;
+
+function checkFactors(input) {
+    const factors = primeFactors(input);
+    console.log('factors are', factors);
+    const actual = factors.reduce(
+        (accumulator, current) => accumulator * current,
+        1
+    );
+    expect(actual).to.equal(input);
+    return factors;
+}
+
+describe('primeFactors', () => {
+    it('returns [2] for primeFactors(2)', () => {
+        expect(primeFactors(2)).to.eql([2]);
+    });
+
+    it('returns [2,2] for primeFactors(4)', () => {
+        expect(primeFactors(4)).to.eql([2, 2]);
+    });
+
+    it('returns [2,2,2,2,2,2] for primeFactors(64)', () => {
+        expect(primeFactors(64)).to.eql([2, 2, 2, 2, 2, 2]);
+    });
+
+    it('returns [3] for primeFactors(3)', () => {
+        expect(primeFactors(3)).to.eql([3]);
+    });
+
+    it('returns [2,3] for primeFactors(6)', () => {
+        expect(primeFactors(6)).to.eql([2, 3]);
+    });
+
+    it('returns [2,3,5,7] for primeFactors(210)', () => {
+        expect(primeFactors(210)).to.eql([2, 3, 5, 7]);
+    });
+
+    it('returns [3, 3, 3607, 3803] for primeFactors(123456789)', () => {
+        const input = 123456789;
+        const factors = primeFactors(123456789);
+        console.log('factors are', factors);
+        const actual = factors.reduce(
+            (accumulator, current) => accumulator * current,
+            1
+        );
+        expect(actual).to.equal(input);
+        return factors;
+    });
+
+    // This one timed out during out test with Version 3
+    it('returns the correct factors for primeFactors(12345678987)', () => {
+        checkFactors(12345678987);
+    });
+});
