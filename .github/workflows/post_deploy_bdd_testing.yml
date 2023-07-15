@@ -25,22 +25,46 @@ jobs:
         - name: Archive code coverage results
           uses: actions/upload-artifact@v3
           with:
-            name: code-coverage-report
+            name: bdd-cucumber-results
             path: cucumber-reports/
 
-        - name: Publish Test Report to GitHub Pages
-          uses: PavanMudigonda/html-reporter-github-pages/composite@v1.1
-          with:
-            test_results: test-reports
-            gh_pages: gh_pages
-            results_history: results-history
-            keep_reports: 10
-        - name: Publish Github Pages
-          if: ${{ always() }}
-          uses: peaceiris/actions-gh-pages@v3.8.0
-          with:
-              github_token: ${{ secrets.GITHUB_TOKEN }}
-              publish_branch: gh-Pages
-              publish_dir: test-reports
-              keep_files: true   
+        # - name: Publish Test Report to GitHub Pages
+        #   uses: PavanMudigonda/html-reporter-github-pages/composite@v1.1
+        #   with:
+        #     test_results: test-reports
+        #     gh_pages: gh_pages
+        #     results_history: results-history
+        #     keep_reports: 10
+        # - name: Publish Github Pages
+        #   if: ${{ always() }}
+        #   uses: peaceiris/actions-gh-pages@v3.8.0
+        #   with:
+        #       github_token: ${{ secrets.GITHUB_TOKEN }}
+        #       publish_branch: gh-Pages
+        #       publish_dir: test-reports
+        #       keep_files: true   
+    
+  # Deploy artifacts to GitHub Pages job
+  deploy-to-pages:
+    # Add a dependency to the build job
+    needs: run-bdd-post-deploy
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2  
+        with:
+            artifact_name: bdd-cucumber-results   
         
