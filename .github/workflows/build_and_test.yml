@@ -33,10 +33,14 @@ jobs:
                 name: code-coverage-report
                 path: coverage/
 
+    kick-deploy-workflow:
+        runs-on: ubuntu-latest
+        needs: build 
+        steps:
             - name: Invoke Azure Deploy workflow
               uses: benc-uk/workflow-dispatch@v1
               with:
-                  workflow: azure_deploy.yml
+                  workflow: main_smsc-web-app.yml
 
     # deploy-to-pages:
     #     # Add a dependency to the build job
