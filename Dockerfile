@@ -40,6 +40,7 @@ COPY environments/.env.smsc.azure /usr/src/app/.env
 COPY modules/ /usr/src/app/modules
 COPY public/ /usr/src/app/public
 COPY views/ /usr/src/app/views
+COPY routes/ /usr/src/app/routes
 COPY index.js /usr/src/app/index.js
 
 # Expose the port where we have the node server listening
