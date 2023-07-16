@@ -26,7 +26,7 @@ const db = pgp(dbConfig);
 
 const app = new express();
 app.use(bodyParser.json());
-app.use(logger(process.env.MORGAN_LOGGING_OUTPUT_FORMAT));
+app.use(logger('dev'));
 app.use(cookieParser());
 
 // Optional since express defaults to CWD/views
@@ -179,14 +179,6 @@ app.delete('/rock/:id', (req, res) => {
         });
 });
 
-const primeFactors = require('./modules/primeFactors');
-app.get('/primeFactors', (req, res) => {
-    const input = req.query.input;
-    const factors = primeFactors(input);
-    console.log('prime factors of ', input, 'are', factors)
-    res.status(200).json({ input, factors });
-});
-
-app.get('/primeFactorUi', (req, res) => {
-    res.render('pages/primeFactors');
-});
+const primeFactorsRouter = require('./routes/primeFactorsRoutes');
+app.use('/primeFactors',primeFactorsRouter);
+console.log('using router', primeFactorsRouter, 'for route /primeFactors');

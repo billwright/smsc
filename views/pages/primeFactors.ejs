@@ -2,15 +2,17 @@
 
 <h1>Find Prime Factors!</h1>
 
-<div class="text-center">
+<div name="InputArea" class="text-center">
     <label
         >Enter number:
-        <input type="number" value="210735124" name="input" id="input" />
+        <input type="number" value="210735124" name="inputBox" id="inputBox" />
     </label>
     <button onclick="getPrimeFactors()">Get Factors</button>
 </div>
-<h2 id="inputNumber"></h2>
-<p id="executionTimeParagraph" class="text-center"></p>
-<ul id="factorList"></ul>
 
+<div name="OutputArea" class="text-center">
+    <h2 id="inputNumberHeading"></h2>
+    <p id="executionTimeParagraph"></p>
+    <ul id="factorList"></ul>
+</div>
 <%- include('../partials/footer'); -%>

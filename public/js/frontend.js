@@ -4,13 +4,13 @@ function removeAllChildNodes(parent) {
     }
 }
 function getPrimeFactors() {
-    const inputBox = document.getElementById('input');
-    const url = '/primeFactors?input=' + inputBox.value;
+    const inputBox = document.getElementById('inputBox');
+    const url = '/primeFactors/api?input=' + inputBox.value;
 
     const ulElement = document.getElementById('factorList');
     removeAllChildNodes(ulElement);
-    const h2InputNumberElement = document.getElementById('inputNumber');
-    h2InputNumberElement.innerHTML = 'thinking...';
+    const inputNumberHeading = document.getElementById('inputNumberHeading');
+    inputNumberHeading.innerHTML = 'thinking...';
     const executionTimeParagraph = document.getElementById('executionTimeParagraph');
     executionTimeParagraph.innerHTML = '';
 
@@ -22,7 +22,7 @@ function getPrimeFactors() {
         .then(({ input, factors }) => {
             removeAllChildNodes(ulElement);
             
-            h2InputNumberElement.innerHTML = `Factors for ${input}`;
+            inputNumberHeading.innerHTML = `Factors for ${input}:`;
             const end = performance.now();
             executionTimeParagraph.innerHTML = `Execution time: ${Math.floor(end - start)} ms`;
 
