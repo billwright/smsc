@@ -181,4 +181,3 @@ app.delete('/rock/:id', (req, res) => {
 
 const primeFactorsRouter = require('./routes/primeFactorsRoutes');
 app.use('/primeFactors',primeFactorsRouter);
-console.log('using router', primeFactorsRouter, 'for route /primeFactors');
