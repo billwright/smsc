@@ -49,3 +49,8 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1820d981b8064628983f718f39e8f445 }}
         images: 'csci3308registry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5c0aff8eeb984ae496fe3c03639967d0 }}/csci3308registry/smsc-server:${{ github.sha }}'
+
+    - name: Kick off post-deploy BDD tests
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+            workflow: post_deploy_bdd_testing.yml
