@@ -119,6 +119,12 @@ const rockRouter = express.Router();
 const SELECT_ALL_ROCKS_QUERY = 'select id,name from rock';
 const SELECT_ONE_ROCK_QUERY = 'select id,name from rock where id=$1';
 
+let db;
+function wrapper(dbConnection) {
+    db = dbConnection;
+    return rockRouter;
+}
+
 rockRouter.get('/api', (req, res) => {
     console.log('Returning all the rocks...');
     db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
@@ -205,3 +211,5 @@ rockRouter.delete('/:id', (req, res) => {
             console.log('ERROR:', error);
         });
 });
+
+module.exports = wrapper;
