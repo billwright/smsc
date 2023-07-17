@@ -6,12 +6,36 @@ var https = require("https");
 const logger = require('morgan');
 const pgp = require('pg-promise')();
 const cookieParser = require('cookie-parser');
- 
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+   
 // Allows easy reading a local .env file to import settings
 require('dotenv').config();
+const {version} = require('./package.json');
 
-const SELECT_ALL_ROCKS_QUERY = 'select id,name from rock';
-const SELECT_ONE_ROCK_QUERY = 'select id,name from rock where id=$1';
+const options = {
+    definition: {
+      openapi: "3.1.0",
+      info: {
+        title: "SMSC API with Swagger",
+        version: version,
+        description:
+          "This is SMSC site and used to schedule outings and for the Tour de Flatirons",
+        contact: {
+          name: "Bill Wright",
+          url: "https://wwwright.com",
+          email: "bill@wwwright.com",
+        },
+      },
+      servers: [
+        { url: "http://localhost:4000", },
+        { url: "https://smsc-web-app.azurewebsites.net/", },
+      ],
+    },
+    apis: ["./routes/*.js"],
+  };
+
+const specs = swaggerJsdoc(options);
 
 const dbConfig = {
     host: process.env.POSTGRES_HOST,
@@ -19,7 +43,7 @@ const dbConfig = {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: true
+    ssl: process.env.POSTGRES_SSL
 };
 // Connect to database using the above details
 const db = pgp(dbConfig);
@@ -28,6 +52,11 @@ const app = new express();
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(cookieParser());
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs, { explorer: true })
+  );
 
 // Optional since express defaults to CWD/views
 // TODO: figure out why this next line doesn't work
@@ -58,8 +87,6 @@ app
 
 module.exports = app;
 
-const {version} = require('./package.json');
-
 app.get('/', (req, res) => {
     res.render('pages/smsc', {
         title: "Sam's Minions Scrambling Club",
@@ -71,113 +98,8 @@ app.get('/tourdeflatirons', (req, res) => {
     res.render('pages/tourdeflatirons', { title: 'Tour de Flatirons' });
 });
 
-app.get('/rock', (req, res) => {
-    console.log('Returning all the rocks...');
-    db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
-        .then(function (data) {
-            res.status(200).json({
-                allRocks: data,
-            });
-        })
-        .catch(function (error) {
-            console.log('Got an error:', error);
-            res.status(500).send({
-                route: req.path,
-                error,
-            });
-        });
-    console.log('Done with this function');
-});
-
-app.get('/rocks', (req, res) => {
-    console.log('Trying to render rocks page...');
-    db.manyOrNone(SELECT_ALL_ROCKS_QUERY)
-        .then(function (data) {
-            const pageData = {
-                user: { name: 'Bill Wright' },
-                rocks: data,
-            };
-            res.render('pages/rocks', pageData);
-        })
-        .catch(function (error) {
-            console.log('Error trying to get rocks from db:', error)
-            res.status(500).json({
-                route: req.path,
-                error: error
-            });
-        });
-});
-
-app.get('/rock2', (req, res) => {
-    const selectPromise = db.manyOrNone(SELECT_ALL_ROCKS_QUERY);
-
-    function handleQueryResults(data) {
-        res.status(200).json({
-            allRocks: data,
-        });
-    }
-
-    function handleError(error) {
-        res.send({
-            route: req.path,
-            error: error,
-        });
-    }
-
-    selectPromise.then(handleQueryResults);
-    selectPromise.catch(handleError);
-});
-
-app.get('/rock/:id', (req, res) => {
-    db.one(SELECT_ONE_ROCK_QUERY, req.params.id)
-        .then(function (data) {
-            res.send(data);
-        })
-        .catch(function (error) {
-            res.status(404).json({
-                route: req.path,
-                error: error,
-            });
-        });
-    //   res.sendFile(path.resolve(__dirname, "../../public/rock.html"));
-});
-
-app.post('/rock', (req, res) => {
-    db.one(
-        'INSERT INTO rock(name, gps_coordinates) VALUES($1, $2) RETURNING id',
-        [req.body.name, req.body.gps_coordinates]
-    )
-        .then((data) => {
-            console.log(data.id); // return created id;
-            res.status(201).json({
-                id: data.id,
-            });
-        })
-        .catch((error) => {
-            console.log('ERROR in post:', error);
-            res.status(500);
-            if (error.code == 'ECONNREFUSED') {
-                const reason = 'Failed to connect to the database';
-                console.log(reason);
-                // In general, we would never return this information to the client
-                res.json({ reason });
-            } else {
-                res.json({ error });
-            }
-        });
-});
-
-app.delete('/rock/:id', (req, res) => {
-    db.result('DELETE FROM rock WHERE id = $1', req.params.id)
-        .then((result) => {
-            // rowCount = number of rows affected by the query
-            console.log(result.rowCount);
-            res.status(200).send(); // print how many records were deleted;
-        })
-        .catch((error) => {
-            console.log('ERROR:', error);
-        });
-});
+const rockRouter = require('./routes/rockRoutes');
+app.use('/rock', rockRouter(db));
 
 const primeFactorsRouter = require('./routes/primeFactorsRoutes');
-app.use('/primeFactors',primeFactorsRouter);
+app.use('/primeFactors', primeFactorsRouter);

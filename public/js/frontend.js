@@ -9,6 +9,7 @@ function getPrimeFactors() {
 
     const ulElement = document.getElementById('factorList');
     removeAllChildNodes(ulElement);
+    
     const inputNumberHeading = document.getElementById('inputNumberHeading');
     inputNumberHeading.innerHTML = 'thinking...';
     const executionTimeParagraph = document.getElementById('executionTimeParagraph');

@@ -1,3 +1,8 @@
+/**
+ * Function that returns the Fibonacci number requested.
+ * @param {number} input - Fibonacci number to return.
+ * @return {number} - Fibonacci number. 
+ */
 function fibonacci(number) {
     // First version:
     // return 0;

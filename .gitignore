@@ -7,3 +7,4 @@ server.key
 db/report.*
 .nyc_output/
 coverage/
+out/
