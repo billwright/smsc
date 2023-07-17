@@ -1,3 +1,8 @@
+/**
+ * Function that returns the prime factors of a number.
+ * @param {number} input - Input number to factor.
+ * @return {number[]} - A list of integers. 
+ */
 function primeFactors(input) {
     const factors = [];
 
